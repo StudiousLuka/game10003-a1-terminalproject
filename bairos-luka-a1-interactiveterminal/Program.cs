@@ -1,13 +1,12 @@
 ﻿//All text has been formatted to fit the default window size that appears when I run the program on this computer, which is 120 characters across.
 //There are many \n (next lines) present in the text for that purpose. It drives me crazy when words get cut off, so I had to do this for myself.
 
-//Variables
 using System;
 
-bool alienEscaped = false;
+//Variables
+
 bool alienSaved = false;
-
-
+int alienRequirement = 36;
 
 
 //Opening Dialogue
@@ -60,7 +59,6 @@ else if (location == "2")
     //Choice - The player tries to use their knife, and stabs an alien
     else if (attack == "2")
     {
-        alienEscaped = true;
         Console.WriteLine("You reach for your knife, but the way the attacker is holding you makes it difficult to use. You manage to stab your\n" +
                           "attacker, and it screams as it lets go of you. You turn around to see what appears to be a short green alien, like a\n" +
                           "stereotypical martian. It whimpers curled up on the floor in pain.\n");
@@ -73,6 +71,34 @@ else if (location == "2")
         if (help == "1")
         {
             Console.WriteLine("The alien abruptly gets up and runs out of the room. You follow him, and he opens a secret doorway to the basement!\n");
+            //Final Area begins, bad route
+            Console.WriteLine("For some reason, the entire basement is literally a forest. Aside from the pitch black \"sky\", the basement is lush with\n" +
+                              "dirt, grass, large trees, and other foliage. You lost track of the alien, but dozens of tiny aliens start running out of\n" +
+                              "the bushes. For some reason, you feel compelled to count them.\n");
+            Console.WriteLine("How many aliens do you count?");
+            string alienCountString = Console.ReadLine(); //The player enters whatever number they want. If it's above the requirement, they continue.
+            int alienCount = int.Parse(alienCountString); //If it's below the requirement, they fail. "Dozens" in the dialogue above is a hint.
+
+            if (alienCount < alienRequirement)
+            {
+                Console.WriteLine($"You count exactly {alienCount} tiny aliens, all running the same direction. You try to follow them, but they're\n" +
+                                  "too fast, and you lose track of them. You have no idea where you came from, you're lost in the dark forest forever!\n");
+                Console.WriteLine("GAME OVER!");
+            }
+            else if (alienCount >= alienRequirement)
+            {
+                Console.WriteLine($"You count exactly {alienCount} tiny aliens, all running the same direction. They run really fast, but there are so\n" +
+                    "many of them, it is not hard to keep up.\n");
+                Console.WriteLine("You find all the tiny aliens, and the normal-sized alien from before, standing in a clearing of what looks like\n" +
+                              "sunlight. In front of them is a humongous alien, wearing a purple robe and a small golden crown.\n" +
+                              "\"I am King Martian!\" the large alien booms. \"I have knowledge of all languages across the galaxy, even your\n" +
+                              "simplistic Earthling ones! My son, Prince Martian told me you stabbed him! I will have you banished from this place!\"");
+                Console.WriteLine("King Martian does not sound happy. He does a weird motion with his hands, and then in the blink of an eye, you are\n" +
+                              "standing outside the mansion property, next to the mailbox, but the entire mansion has vanished. All that remains is\n" +
+                              "the mailbox and a flat patch of dirt where the mansion used to be. Looks like we'll never know what the aliens were\n" +
+                              "doing in there.\n");
+                Console.WriteLine("YOU WON? BAD ENDING ACHIEVED.");
+            }
         }
 
         //Choice - The player heals the alien they stabbed with bandages
