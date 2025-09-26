@@ -5,8 +5,9 @@ using System;
 
 //Variables
 
-bool alienSaved = false;
-int alienRequirement = 36;
+bool alienSaved = false; //Whether or not the alien was saved
+int alienRequirement = 30; //How many aliens the player has to count to progress
+bool honest = false; //Whether or not the player confessed to their crime
 
 
 //Opening Dialogue
@@ -38,7 +39,7 @@ if (location == "1")
 
 //Choice - The player is attacked from behind
 else if (location == "2")
-    {
+{
     Console.WriteLine("You enter the inconspicuous door. Inside, you find a fancy dining room, but all the furniture is upside-down, as if\n" +
                       "glued to the ceiling. The chandelier is attached to the floor too, how peculiar. You begin writing this down in your\n" +
                       "notebook,when suddenly something grabs you from behind! Its grip is strong, if you cannot escape, this might be the end!\n");
@@ -63,7 +64,7 @@ else if (location == "2")
                           "attacker, and it screams as it lets go of you. You turn around to see what appears to be a short green alien, like a\n" +
                           "stereotypical martian. It whimpers curled up on the floor in pain.\n");
         Console.WriteLine("Now what?");
-        Console.WriteLine("1) I don't care about this alien, it tried to kill me!"); //Wrong choice, will lead to game over
+        Console.WriteLine("1) I don't care about this alien, it tried to kill me!"); //Wrong choice, will lead to bad ending
         Console.WriteLine("2) I'll use my medical supplies to help the alien."); //Correct choice
         string help = Console.ReadLine();
 
@@ -87,6 +88,7 @@ else if (location == "2")
             }
             else if (alienCount >= alienRequirement)
             {
+                //King alien speaks to you, bad ending happens
                 Console.WriteLine($"You count exactly {alienCount} tiny aliens, all running the same direction. They run really fast, but there are so\n" +
                     "many of them, it is not hard to keep up.\n");
                 Console.WriteLine("You find all the tiny aliens, and the normal-sized alien from before, standing in a clearing of what looks like\n" +
@@ -108,8 +110,68 @@ else if (location == "2")
             Console.WriteLine("Feeling remorseful, you pull out your first aid supplies and bandage up the little alien. The alien bows before you, as\n" +
                               "if thankful for your help (even though you stabbed him). He then leads you to a secret passage where you can enter\n" +
                               "the basement!\n");
+            //Final Area begins, good route
+            Console.WriteLine("For some reason, the entire basement is literally a forest. Aside from the pitch black \"sky\", the basement is lush with\n" +
+                              "dirt, grass, large trees, and other foliage. You lost track of the alien, but dozens of tiny aliens start running out of\n" +
+                              "the bushes. For some reason, you feel compelled to count them.\n");
+            Console.WriteLine("How many aliens do you count?");
+            string alienCountString = Console.ReadLine(); //The player enters whatever number they want. If it's above the requirement, they continue.
+            int alienCount = int.Parse(alienCountString); //If it's below the requirement, they fail. "Dozens" in the dialogue above is a hint.
+
+            if (alienCount < alienRequirement)
+            {
+                Console.WriteLine($"You count exactly {alienCount} tiny aliens, all running the same direction. You try to follow them, but they're\n" +
+                                  "too fast, and you lose track of them. You have no idea where you came from, you're lost in the dark forest forever!\n");
+                Console.WriteLine("GAME OVER!");
+            }
+            else if (alienCount >= alienRequirement)
+            {
+                //King alien speaks to you, good ending happens
+                Console.WriteLine($"You count exactly {alienCount} tiny aliens, all running the same direction. They run really fast, but there are so\n" +
+                    "many of them, it is not hard to keep up.\n");
+                Console.WriteLine("You find all the tiny aliens, and the normal-sized alien from before, standing in a clearing of what looks like\n" +
+                              "sunlight. In front of them is a humongous alien, wearing a purple robe and a small golden crown.\n" +
+                              "\"I am King Martian!\" the large alien booms. \"I have knowledge of all languages across the galaxy, even your\n" +
+                              "simplistic Earthling ones! My son, Prince Martian told me you saved his life! As a token of our gratitude, I shall\n" +
+                              "grant you knowledge of all the secrets of the galaxy. What is your name?\"\n");
+                Console.WriteLine("All the secrets of the galaxy sounds like a lot of knowledge to handle. What will you do?");
+                Console.WriteLine("1) Tell him you stabbed his son."); //Choice makes you "honest". Nothing other than a bonus at the end
+                Console.WriteLine("2) Accept alien knowledge."); //Choice makes you "dishonest"
+                string honestString = Console.ReadLine();
+
+                //"Dishonest" scenario
+                if (honestString == "2")
+                {
+                    Console.WriteLine($"You say, \"I'm {playerName}. I would be happy to know the secrets of the galaxy.\"\n" +
+                                      $"\"Good to meet you, {playerName}! Now, recieve my vast knowledge!\" the king responds.");
+                    Console.WriteLine("With the snap of his fingers, you instantly gain knowledge of all the galaxy's secrets. It surprisingly did not\n" +
+                                      "make your head explode. The aliens say their farewells, and you return to base with newfound information that\n" +
+                                      "will help humanity thrive for trillions of years!\n");
+                    Console.WriteLine("YOU WON! GOOD ENDING ACHIEVED.");
+                    if (honest == false)
+                        Console.WriteLine("But you were not honest.");
+                    else if (honest == true)
+                        Console.WriteLine($"You were honest! Good job {playerName}!");
+                }
+
+                //"Honest" scenario
+                else if (honestString == "1")
+                {
+                    honest = true;
+                    Console.WriteLine($"In an attempt to stop the king, you tell him that you stabbed his son." +
+                                      $"\"Yeah, I know, but you saved him after anyway. I'm obligated to give you this knowledge as the king.\"");
+                    Console.WriteLine("Apparently, according to these aliens, stabbing someone doesn't matter if you helped them afterwards.\n" +
+                                      "With the snap of his fingers, you instantly gain knowledge of all the galaxy's secrets. It surprisingly did not\n" +
+                                      "make your head explode. The aliens say their farewells, and you return to base with newfound information that\n" +
+                                      "will help humanity thrive for trillions of years!\n");
+                    Console.WriteLine("YOU WON! GOOD ENDING ACHIEVED.");
+                    if (honest == false)
+                        Console.WriteLine("But you were not honest.");
+                    else if (honest == true)
+                        Console.WriteLine($"You were honest! Good job! {playerName}!");
+                }
+            }
         }
 
     }
-
-    }
+}
