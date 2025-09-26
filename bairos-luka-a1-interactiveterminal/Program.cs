@@ -63,7 +63,7 @@ else if (location == "2")
         Console.WriteLine("You reach for your knife, but the way the attacker is holding you makes it difficult to use. You manage to stab your\n" +
                           "attacker, and it screams as it lets go of you. You turn around to see what appears to be a short green alien, like a\n" +
                           "stereotypical martian. It whimpers curled up on the floor in pain.\n");
-        Console.WriteLine("Now what?");
+        Console.WriteLine("What will you do now?");
         Console.WriteLine("1) I don't care about this alien, it tried to kill me!"); //Wrong choice, will lead to bad ending
         Console.WriteLine("2) I'll use my medical supplies to help the alien."); //Correct choice
         string help = Console.ReadLine();
@@ -76,7 +76,7 @@ else if (location == "2")
             Console.WriteLine("For some reason, the entire basement is literally a forest. Aside from the pitch black \"sky\", the basement is lush with\n" +
                               "dirt, grass, large trees, and other foliage. You lost track of the alien, but dozens of tiny aliens start running out of\n" +
                               "the bushes. For some reason, you feel compelled to count them.\n");
-            Console.WriteLine("How many aliens do you count?");
+            Console.WriteLine("How many aliens do you count? (Enter whole numbers only)");
             string alienCountString = Console.ReadLine(); //The player enters whatever number they want. If it's above the requirement, they continue.
             int alienCount = int.Parse(alienCountString); //If it's below the requirement, they fail. "Dozens" in the dialogue above is a hint.
 
@@ -114,7 +114,7 @@ else if (location == "2")
             Console.WriteLine("For some reason, the entire basement is literally a forest. Aside from the pitch black \"sky\", the basement is lush with\n" +
                               "dirt, grass, large trees, and other foliage. You lost track of the alien, but dozens of tiny aliens start running out of\n" +
                               "the bushes. For some reason, you feel compelled to count them.\n");
-            Console.WriteLine("How many aliens do you count?");
+            Console.WriteLine("How many aliens do you count? (Enter whole numbers only)");
             string alienCountString = Console.ReadLine(); //The player enters whatever number they want. If it's above the requirement, they continue.
             int alienCount = int.Parse(alienCountString); //If it's below the requirement, they fail. "Dozens" in the dialogue above is a hint.
 
